@@ -1,34 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
+import Papa, { ParseResult } from 'papaparse'
+
+type Data = {
+  Materiaalsoort: string
+  Spatrand: string
+  Vensterbank: string
+  Boorgaten_per_stuk_mogelijk: boolean
+  WCD_mogelijk: boolean
+  Randafwerking_mogelijk: boolean
+  Prijs_per_m2: number
+  Randafwerking_pm: number
+  Spatrand_pm: number
+  Vensterbank_pm: number
+  Uitsparing_onderbouw: number
+  Uitsparing_inleg: number
+  Uitsparing_ruw: number
+  Kraangat: number
+  Zeepdispenser: number
+  Boorgaten_per_stuk: number
+  WCD: number;
+  Achterwand_pm: number
+  Randafwerking_pm_optie2: number
+}
+
+type Values = {
+  data: Data[]
+}
+
+const useReadCSV = () => {
+  const [values, setValues] = useState<Values | undefined>()
+
+  const getCSV = () => {
+    Papa.parse("/PriceList.csv", {
+      header: true,
+      download: true,
+      delimiter: ";",
+      complete: (result: ParseResult<Data>) => {
+        setValues(result)
+      }
+    })
+  }
+
+  useEffect(() => {
+    getCSV()
+  }, [])
+
+  return values
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  console.log(useReadCSV());
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+
+    </div>
   )
 }
 
