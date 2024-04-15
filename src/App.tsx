@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './App.css'
 import Papa, { ParseResult } from 'papaparse'
 
 type Data = {
@@ -53,7 +52,9 @@ function App() {
   console.log(useReadCSV());
 
   return (
-    <div>
+    <div className='container'>
+      <div className='box bordercenter'>left</div>
+      <div className='box'>right</div>
 
     </div>
   )
