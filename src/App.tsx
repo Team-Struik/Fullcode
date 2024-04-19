@@ -1,5 +1,34 @@
 import { useState, useEffect } from "react";
 import Papa, { ParseResult } from "papaparse";
+import { Button } from "./components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "./components/ui/card";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./components/ui/alert-dialog";
+import { Pencil1Icon, Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 
 type Data = {
   Materiaalsoort: string;
@@ -52,49 +81,86 @@ function App() {
   console.log(useReadCSV());
 
   return (
-    <div className="container">
-      <div
-        className="box bordercenter"
-        style={{
-          position: "relative",
-          display: "flex",
-          justifyContent: "center",        }}
-      >
-        <div style={{ position: "absolute", top: "40px", left: "140px", fontSize: "30px"}}>BlissDigital</div>
-        <div style={{ position: "absolute", top: "100px", left: "140px" }}>
-          <button
-            style={{ border: "1px solid white", color: "white" }}
-            onClick={() => alert("materiaalkeuze gemaakt")}
-          >
-            Kies Materiaal
-          </button>
-          <div style={{ position: "absolute", top: "60px", fontSize: "25px"}}>Materialen</div>
+    <div className="grid-container grid h-screen grid-cols-2">
+      <div className="px-8 py-4 border-r-2 h-screen">
+        <div className="pt-4 pb-8">
+          <h1 className="text-4xl font-bold">
+            <span className="text-primary">Blis</span>
+            <span className="text-outline">Digital</span>
+          </h1>
         </div>
-        <div
-          style={{
-            position: "absolute",
-            bottom: "25px",
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-            gap: 75,
-          }}
-        >
-          <button
-            style={{ border: "1px solid blue", color: "blue" }}
-            onClick={() => alert("PDF gegenereerd")}
-          >
-            Genereer PDF
-          </button>
-          <button
-            style={{ border: "1px solid white", color: "white" }}
-            onClick={() => alert("Foto gescand")}
-          >
-            Scan foto
-          </button>
+        <Select>
+          <SelectTrigger className="w-fit">
+            <SelectValue placeholder="Select a material" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Nieuw Materiaal</SelectLabel>
+              <SelectItem value="NobleDesiree">
+                Noble Desiree Grey Matt
+              </SelectItem>
+              <SelectItem value="NobleCarrara">
+                Noble Carrara Verzoet
+              </SelectItem>
+              <SelectItem value="TaurusWhite">
+                Taurus Terazzo White Verzoet
+              </SelectItem>
+              <SelectItem value="TaurusBlack">Taurus Terazzo Black</SelectItem>
+              <SelectItem value="GlencoeVerzoet">Glencoe Verzoet</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+
+        <div className="py-8 grid gap-2">
+          <h2 className="text-2xl font-bold">Materialen</h2>
+          <Card>
+            <CardHeader>
+              <CardTitle>Geselecteerde Materialen</CardTitle>
+              <CardDescription>
+                Pas materialen aan of verwijder deze.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center">
+                <p className="mr-2">Random materiaal</p>
+          <AlertDialog>
+            <AlertDialogTrigger>
+                <Button variant="ghost">
+                  
+                <TrashIcon className="h-5 w-5 " />
+                </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Weet u het zeker?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  <p>Deze actie kan niet ongedaan worden gemaakt. Dit zal je geselecteerde materiaal verwijderen en je gegevens (afmetingen en toevoegingen) wissen.</p>
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Terug</AlertDialogCancel>
+                <AlertDialogAction>Verijderen</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+                <Button variant="ghost">
+                  
+                <Pencil1Icon className="h-5 w-5" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div>
+          <Button>Genereer PDF</Button>
+          <Button variant="outline">Scan foto</Button>
+
         </div>
       </div>
-      <div className="box">right</div>
+      <div>
+        test
+      </div>
     </div>
   );
 }
