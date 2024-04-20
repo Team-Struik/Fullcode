@@ -140,7 +140,7 @@ function MaterialSelect() {
               Zeepdispenser
             </Button>
             <Card className="flex w-2/5 flex-grow m-1">
-              <p className="mx-2">Achterwand</p>{" "}
+              <p className="mx-2 pt-2 text-sm font-medium">Achterwand</p>{" "}
               <Input
                 onChange={(e) => {
                   setRearWall(Number(e.target.value));

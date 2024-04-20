@@ -1,23 +1,7 @@
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@radix-ui/react-alert-dialog";
+
 import { Pencil1Icon, TrashIcon } from "@radix-ui/react-icons";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectItem,
-} from "@radix-ui/react-select";
-import { AlertDialogHeader, AlertDialogFooter } from "../ui/alert-dialog";
+
+import { AlertDialogHeader, AlertDialogFooter, AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -26,6 +10,7 @@ import {
   CardDescription,
   CardContent,
 } from "../ui/card";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
 
 function Home() {
   return (
@@ -81,7 +66,7 @@ function Home() {
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Terug</AlertDialogCancel>
-                    <AlertDialogAction>Verijderen</AlertDialogAction>
+                    <AlertDialogAction>Verwijderen</AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
