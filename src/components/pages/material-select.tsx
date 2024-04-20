@@ -50,7 +50,7 @@ function MaterialSelect() {
           <p className="mr-2 text-lg font-medium w-full">0 - 150mm</p>
         </div>
         <div className="flex mx-2">
-          <p className="mr-2 text-lg font-medium w-full">vensterbank</p>{" "}
+          <p className="mr-2 text-lg font-medium w-full">Vensterbank</p>{" "}
           <Input className="mr-2"></Input> <Input className="mr-2"></Input>
           <p className="mr-2 text-lg font-medium w-full">0 - 150mm</p>
         </div>
@@ -71,7 +71,7 @@ function MaterialSelect() {
               Zeepdispenser
             </Button>
             <Card className="flex w-2/5 flex-grow m-1">
-              Achterwand <Input className="ml-2" />
+              <p className="mx-2">Achterwand</p> <Input />
             </Card>
           </div>
           <div className="flex flex-row flex-grow px-3">
@@ -86,12 +86,14 @@ function MaterialSelect() {
             </Button>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Totaal:</h2>
           <div className="flex justify-end">
             <AlertDialog>
               <AlertDialogTrigger>
-                <Button variant="destructive" className="mr-2">Verwijderen</Button>
+                <Button variant="destructive" size="lg" className="mr-2">
+                  Verwijderen
+                </Button>
               </AlertDialogTrigger>
               <AlertDialogContent>
                 <AlertDialogHeader>
@@ -110,7 +112,9 @@ function MaterialSelect() {
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-            <Button variant="outline">Toevoegen</Button>
+            <Button variant="outline" size="lg">
+              Toevoegen
+            </Button>
           </div>
         </div>
       </div>
