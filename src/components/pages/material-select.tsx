@@ -1,4 +1,4 @@
-import { TrashIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,6 +15,22 @@ import { Card } from "../ui/card";
 import { Input } from "../ui/input";
 
 function MaterialSelect() {
+  const [width, setWidth] = useState<number | null>(null);
+  const [length, setLength] = useState<number | null>(null);
+  const [drillholes, setDrillholes] = useState<number | null>(null);
+  const [wallOutlet, setWallOutlet] = useState<number | null>(null);
+  const [wallOutletWidth, setWallOutletWidth] = useState<number | null>(null);
+  const [wallOutletHeight, setWallOutletHeight] = useState<number | null>(null);
+  const [edgingFinishWidth, setEdgingFinishWidth] = useState<number | null>(
+    null,
+  );
+  const [edgingFinishHeight, setEdgingFinishHeight] = useState<number | null>(
+    null,
+  );
+  const [rearWall, setRearWall] = useState<number | null>(null);
+  const [windowsillWidth, setWindowsillWidth] = useState<number | null>(null);
+  const [windowsillHeight, setWindowsillHeight] = useState<number | null>(null);
+
   return (
     <div className="grid gap-8">
       <div>
@@ -25,38 +41,91 @@ function MaterialSelect() {
         <div className="flex">
           <Input
             className="w-fit mr-2"
-            id="Breedte"
-            name="Breedte"
-            placeholder={"Breedte(M)"}
+            id="width"
+            name="width"
+            placeholder={"Breedte(m)"}
+            onChange={(e) => {
+              setWidth(Number(e.target.value));
+            }}
           />
           <Input
             className="w-fit mx-2"
-            id="Lengte"
-            name="Lengte"
-            placeholder={"Lengte(M)"}
+            id="length"
+            name="length"
+            placeholder={"Lengte(m)"}
+            onChange={(e) => {
+              setLength(Number(e.target.value));
+            }}
           />
           <div className="flex mx-2">
             <p className="mr-2 text-lg font-medium">Boorgaten</p>{" "}
-            <Input></Input>
+            <Input
+              onChange={(e) => {
+                setDrillholes(Number(e.target.value));
+              }}
+            />
           </div>
           <div className="flex mx-2">
             <p className="mr-2 text-lg font-medium">Wandcontactdoos</p>{" "}
-            <Input></Input>
+            <Input
+              onChange={(e) => {
+                setWallOutlet(Number(e.target.value));
+              }}
+            />
           </div>
         </div>
         <div className="flex mx-2">
           <p className="mr-2 text-lg font-medium w-full">Wandcontactdoos</p>{" "}
-          <Input className="mr-2"></Input> <Input className="mr-2"></Input>
+          <Input
+            className="mr-2"
+            placeholder="Breedte(mm)"
+            onChange={(e) => {
+              setWallOutletWidth(Number(e.target.value));
+            }}
+          />{" "}
+          <Input
+            className="mr-2"
+            placeholder="Hoogte(mm)"
+            onChange={(e) => {
+              setWallOutletHeight(Number(e.target.value));
+            }}
+          />
           <p className="mr-2 text-lg font-medium w-full">0 - 150mm</p>
         </div>
         <div className="flex mx-2">
           <p className="mr-2 text-lg font-medium w-full">Vensterbank</p>{" "}
-          <Input className="mr-2"></Input> <Input className="mr-2"></Input>
+          <Input
+            className="mr-2"
+            placeholder="Breedte(mm)"
+            onChange={(e) => {
+              setWindowsillWidth(Number(e.target.value));
+            }}
+          />{" "}
+          <Input
+            className="mr-2"
+            placeholder="Hoogte(mm)"
+            onChange={(e) => {
+              setWindowsillHeight(Number(e.target.value));
+            }}
+          />
           <p className="mr-2 text-lg font-medium w-full">0 - 150mm</p>
         </div>
         <div className="flex mx-2">
           <p className="mr-2 text-lg font-medium w-full">Randafwerking</p>{" "}
-          <Input className="mr-2"></Input> <Input className="mr-2"></Input>
+          <Input
+            className="mr-2"
+            placeholder="Breedte(mm)"
+            onChange={(e) => {
+              setEdgingFinishWidth(Number(e.target.value));
+            }}
+          />{" "}
+          <Input
+            className="mr-2"
+            placeholder="Hoogte(mm)"
+            onChange={(e) => {
+              setEdgingFinishHeight(Number(e.target.value));
+            }}
+          />
           <p className="mr-2 text-lg font-medium w-full">40 - 150mm</p>
         </div>
       </div>
@@ -71,7 +140,12 @@ function MaterialSelect() {
               Zeepdispenser
             </Button>
             <Card className="flex w-2/5 flex-grow m-1">
-              <p className="mx-2">Achterwand</p> <Input />
+              <p className="mx-2">Achterwand</p>{" "}
+              <Input
+                onChange={(e) => {
+                  setRearWall(Number(e.target.value));
+                }}
+              />
             </Card>
           </div>
           <div className="flex flex-row flex-grow px-3">

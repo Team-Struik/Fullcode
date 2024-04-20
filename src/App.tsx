@@ -62,7 +62,8 @@ function App() {
             <span className="text-outline">Digital</span>
           </h1>
         </div>
-        <MaterialSelect />
+        <Home />
+        {/* <MaterialSelect /> */}
       </div>
       <div>test</div>
     </div>
