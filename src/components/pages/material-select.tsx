@@ -31,6 +31,20 @@ function MaterialSelect() {
   const [windowsillWidth, setWindowsillWidth] = useState<number | null>(null);
   const [windowsillHeight, setWindowsillHeight] = useState<number | null>(null);
 
+  const [isSelectedSinkHole, setIsSelectedSinkhole] = useState<boolean>(false);
+  const [isSelectedSoapDispender, setIsSelectedSoapDispender] =
+    useState<boolean>(false);
+  const [isSelectedUndermountSink, setIsSelectedUndermountSink] =
+    useState<boolean>(false);
+  const [isSelectedInlaySink, setIsSelectedInlaySink] =
+    useState<boolean>(false);
+  const [isSelectedCoarseSink, setIsSelectedCoarseSink] =
+    useState<boolean>(false);
+
+    const toggleSelection = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
+      setter(prevState => !prevState);
+    };
+
   return (
     <div className="grid gap-8">
       <div>
@@ -132,13 +146,26 @@ function MaterialSelect() {
       <div className="grid gap-2">
         <h2 className="text-2xl font-bold">Toevoegingen</h2>
         <div>
-          <div className="flex flex-row flex-grow px-3">
-            <Button variant="outline" className="flex-grow m-1">
+          <div className="flex flex-row flex-grow pr-3">
+            <Button
+              variant="outline"
+              className={`flex-grow m-1 focus:outline-none ${
+                isSelectedSinkHole ? "border-primary" : ""
+              }`}
+              onClick={() => toggleSelection(setIsSelectedSinkhole)}
+            >
               Kraangat
             </Button>
-            <Button variant="outline" className="flex-grow m-1">
+            <Button
+              variant="outline"
+              className={`flex-grow m-1 focus:outline-none ${
+                isSelectedSoapDispender ? "border-primary" : ""
+              }`}
+              onClick={() => toggleSelection(setIsSelectedSoapDispender)}
+            >
               Zeepdispenser
             </Button>
+
             <Card className="flex w-2/5 flex-grow m-1">
               <p className="mx-2 pt-2 text-sm font-medium">Achterwand</p>{" "}
               <Input
@@ -148,15 +175,33 @@ function MaterialSelect() {
               />
             </Card>
           </div>
-          <div className="flex flex-row flex-grow px-3">
-            <Button variant="outline" className="flex-grow m-1">
+          <div className="flex flex-row flex-grow pr-3">
+            <Button
+              variant="outline"
+              className={`flex-grow m-1 focus:outline-none ${
+                isSelectedUndermountSink ? "border-primary" : ""
+              }`}
+              onClick={() => toggleSelection(setIsSelectedUndermountSink)}
+            >
               Spoelback: onderbouw
             </Button>
-            <Button variant="outline" className="flex-grow m-1">
+            <Button
+              variant="outline"
+              className={`flex-grow m-1 focus:outline-none ${
+                isSelectedInlaySink ? "border-primary" : ""
+              }`}
+              onClick={() => toggleSelection(setIsSelectedInlaySink)}
+            >
               Spoelback: inleg
             </Button>
-            <Button variant="outline" className="flex-grow m-1">
-              Spoelback: ruw
+            <Button
+              variant="outline"
+              className={`flex-grow m-1 focus:outline-none ${
+                isSelectedCoarseSink ? "border-primary" : ""
+              }`}
+              onClick={() => toggleSelection(setIsSelectedCoarseSink)}
+            >
+              Spoelback: inleg
             </Button>
           </div>
         </div>
@@ -182,7 +227,7 @@ function MaterialSelect() {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Terug</AlertDialogCancel>
-                  <AlertDialogAction>Verijderen</AlertDialogAction>
+                  <AlertDialogAction>Verwijderen</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
