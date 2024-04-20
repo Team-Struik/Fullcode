@@ -22,7 +22,7 @@
     --destructive-foreground: 60 9.1% 97.8%;
     --border: 12 6.5% 15.1%;
     --input: 12 6.5% 15.1%;
-    --ring: 35.5 91.7% 32.9%;
+    --ring: 47.9 95.8% 53.1%;
     --radius: 0.5rem;
   }
 
@@ -38,5 +38,5 @@
 
 .text-outline {
   color: transparent;
-  -webkit-text-stroke: 1px #f8d212;
+  -webkit-text-stroke: 1px hsl(var(--primary));
 }

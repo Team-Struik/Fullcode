@@ -41,9 +41,11 @@ function MaterialSelect() {
   const [isSelectedCoarseSink, setIsSelectedCoarseSink] =
     useState<boolean>(false);
 
-    const toggleSelection = (setter: React.Dispatch<React.SetStateAction<boolean>>) => {
-      setter(prevState => !prevState);
-    };
+  const toggleSelection = (
+    setter: React.Dispatch<React.SetStateAction<boolean>>,
+  ) => {
+    setter((prevState) => !prevState);
+  };
 
   return (
     <div className="grid gap-8">
