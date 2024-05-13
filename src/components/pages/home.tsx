@@ -27,8 +27,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import useReadCSV from "@/functions/ReadCSV";
+import { useState } from "react";
 
 function Home() {
+  const data = useReadCSV();
   return (
     <>
       <Select>
@@ -38,15 +41,12 @@ function Home() {
         <SelectContent>
           <SelectGroup>
             <SelectLabel>Nieuw Materiaal</SelectLabel>
-            <SelectItem value="NobleDesiree">
-              Noble Desiree Grey Matt
-            </SelectItem>
-            <SelectItem value="NobleCarrara">Noble Carrara Verzoet</SelectItem>
-            <SelectItem value="TaurusWhite">
-              Taurus Terazzo White Verzoet
-            </SelectItem>
-            <SelectItem value="TaurusBlack">Taurus Terazzo Black</SelectItem>
-            <SelectItem value="GlencoeVerzoet">Glencoe Verzoet</SelectItem>
+            {data?.map((item) => (
+              <SelectItem value={item.Materiaalsoort}>
+                {item.Materiaalsoort}
+              </SelectItem>
+
+            ))}
           </SelectGroup>
         </SelectContent>
       </Select>
