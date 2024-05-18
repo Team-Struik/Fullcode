@@ -29,9 +29,12 @@ import {
 } from "../ui/select";
 import useReadCSV from "@/functions/ReadCSV";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const data = useReadCSV();
+  const navigate = useNavigate();
+
   return (
     <>
       <Select>
@@ -86,7 +89,7 @@ function Home() {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-              <Button variant="ghost">
+              <Button variant="ghost" onClick={() => navigate("/MaterialSelect")}>
                 <Pencil1Icon className="h-5 w-5" />
               </Button>
             </div>
