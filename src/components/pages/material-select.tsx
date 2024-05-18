@@ -13,8 +13,11 @@ import {
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { Input } from "../ui/input";
+import { useNavigate } from "react-router-dom";
 
 function MaterialSelect() {
+  const navigate = useNavigate();
+
   const [width, setWidth] = useState<number | null>(null);
   const [length, setLength] = useState<number | null>(null);
   const [drillholes, setDrillholes] = useState<number | null>(null);
@@ -151,18 +154,16 @@ function MaterialSelect() {
           <div className="flex flex-row flex-grow pr-3">
             <Button
               variant="outline"
-              className={`flex-grow m-1 focus:outline-none ${
-                isSelectedSinkHole ? "border-primary" : ""
-              }`}
+              className={`flex-grow m-1 focus:outline-none ${isSelectedSinkHole ? "border-primary" : ""
+                }`}
               onClick={() => toggleSelection(setIsSelectedSinkhole)}
             >
               Kraangat
             </Button>
             <Button
               variant="outline"
-              className={`flex-grow m-1 focus:outline-none ${
-                isSelectedSoapDispender ? "border-primary" : ""
-              }`}
+              className={`flex-grow m-1 focus:outline-none ${isSelectedSoapDispender ? "border-primary" : ""
+                }`}
               onClick={() => toggleSelection(setIsSelectedSoapDispender)}
             >
               Zeepdispenser
@@ -180,27 +181,24 @@ function MaterialSelect() {
           <div className="flex flex-row flex-grow pr-3">
             <Button
               variant="outline"
-              className={`flex-grow m-1 focus:outline-none ${
-                isSelectedUndermountSink ? "border-primary" : ""
-              }`}
+              className={`flex-grow m-1 focus:outline-none ${isSelectedUndermountSink ? "border-primary" : ""
+                }`}
               onClick={() => toggleSelection(setIsSelectedUndermountSink)}
             >
               Spoelback: onderbouw
             </Button>
             <Button
               variant="outline"
-              className={`flex-grow m-1 focus:outline-none ${
-                isSelectedInlaySink ? "border-primary" : ""
-              }`}
+              className={`flex-grow m-1 focus:outline-none ${isSelectedInlaySink ? "border-primary" : ""
+                }`}
               onClick={() => toggleSelection(setIsSelectedInlaySink)}
             >
               Spoelback: inleg
             </Button>
             <Button
               variant="outline"
-              className={`flex-grow m-1 focus:outline-none ${
-                isSelectedCoarseSink ? "border-primary" : ""
-              }`}
+              className={`flex-grow m-1 focus:outline-none ${isSelectedCoarseSink ? "border-primary" : ""
+                }`}
               onClick={() => toggleSelection(setIsSelectedCoarseSink)}
             >
               Spoelback: inleg
@@ -212,7 +210,7 @@ function MaterialSelect() {
           <div className="flex justify-end">
             <AlertDialog>
               <AlertDialogTrigger>
-                <Button variant="destructive" size="lg" className="mr-2">
+                <Button variant="destructive" size="lg" className="mr-2" onClick={() => navigate(-1)}>
                   Verwijderen
                 </Button>
               </AlertDialogTrigger>
@@ -233,7 +231,7 @@ function MaterialSelect() {
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="lg" onClick={() => navigate(-1)}>
               Toevoegen
             </Button>
           </div>
