@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, HtmlHTMLAttributes, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,25 +15,36 @@ import { Card } from "../ui/card";
 import { Input } from "../ui/input";
 import { useNavigate } from "react-router-dom";
 
-function MaterialSelect() {
+function MaterialSelect(props: {
+  Data: {
+    setWidth: (arg0: number) => void;
+    setLength: (arg0: number) => void;
+    setDrillholes: (arg0: number) => void;
+    setWallOutlet: (arg0: number) => void;
+    setWallOutletWidth: (arg0: number) => void;
+    setWallOutletHeight: (arg0: number) => void;
+    setWindowsillWidth: (arg0: number) => void;
+    setWindowsillHeight: (arg0: number) => void;
+    setEdgingFinishWidth: (arg0: number) => void;
+    setEdgingFinishHeight: (arg0: number) => void;
+    setIsSelectedSinkhole: (arg0: boolean) => void;
+    setIsSelectedSoapDispender: (arg0: boolean) => void;
+    setRearWall: (arg0: number) => void;
+    setIsSelectedUndermountSink: (arg0: boolean) => void;
+    setIsSelectedInlaySink: (arg0: boolean) => void;
+    setIsSelectedCoarseSink: (arg0: boolean) => void;
+    isSelectedSinkHole: boolean;
+    isSelectedSoapDispender: boolean;
+    isSelectedUndermountSink: boolean;
+    isSelectedInlaySink: boolean;
+    isSelectedCoarseSink: boolean;
+  }
+}) {
   const navigate = useNavigate();
 
-  const [width, setWidth] = useState<number | null>(null);
-  const [length, setLength] = useState<number | null>(null);
-  const [drillholes, setDrillholes] = useState<number | null>(null);
-  const [wallOutlet, setWallOutlet] = useState<number | null>(null);
-  const [wallOutletWidth, setWallOutletWidth] = useState<number | null>(null);
-  const [wallOutletHeight, setWallOutletHeight] = useState<number | null>(null);
-  const [edgingFinishWidth, setEdgingFinishWidth] = useState<number | null>(
-    null,
-  );
-  const [edgingFinishHeight, setEdgingFinishHeight] = useState<number | null>(
-    null,
-  );
-  const [rearWall, setRearWall] = useState<number | null>(null);
-  const [windowsillWidth, setWindowsillWidth] = useState<number | null>(null);
-  const [windowsillHeight, setWindowsillHeight] = useState<number | null>(null);
-
+  /////////////////////////////////////////////
+  // Is dom maar laat staan voor nu. geloof me
+  /////////////////////////////////////////////
   const [isSelectedSinkHole, setIsSelectedSinkhole] = useState<boolean>(false);
   const [isSelectedSoapDispender, setIsSelectedSoapDispender] =
     useState<boolean>(false);
@@ -50,6 +61,75 @@ function MaterialSelect() {
     setter((prevState) => !prevState);
   };
 
+  // Blad afmetingen
+  const OnWidthChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setWidth(Number(event.target.value));
+  };
+  const OnLengthChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setLength(Number(event.target.value));
+  };
+
+  // Aantal boorgaten
+  const OnDrillHolesChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setDrillholes(Number(event.target.value));
+  };
+
+  // Aantal wandcontactdozen
+  const OnWallOutletChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setWallOutlet(Number(event.target.value));
+  };
+
+  // Wandcontactdoos afmetingen
+  const OnWallOutletWidthChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setWallOutletWidth(Number(event.target.value));
+  };
+  const OnWallOutletHeightChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setWallOutletHeight(Number(event.target.value));
+  };
+
+  // Vensterbank afmetingen
+  const OnWindowsillWidthChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setWindowsillWidth(Number(event.target.value));
+  }
+
+  const OnWindowsillHeightChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setWindowsillHeight(Number(event.target.value));
+  }
+
+  // Randafwerking afmetingen
+  const OnEdgingFinishWidthChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setEdgingFinishWidth(Number(event.target.value));
+  };
+  const OnEdgingFinishHeightChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setEdgingFinishHeight(Number(event.target.value));
+  };
+
+  // Kraangat
+  const OnSinkHoleChangeHandler = (e: boolean) => {
+    props.Data.setIsSelectedSinkhole(!e);
+  };
+
+  // Zeepdispenser
+  const OnSoapDispenderChangeHandler = (e: boolean) => {
+    props.Data.setIsSelectedSoapDispender(!e);
+  };
+
+  // Achterwand
+  const OnRearWallChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.Data.setRearWall(Number(event.target.value));
+  };
+
+  // Spoelbakken
+  const OnUndermountSinkChangeHandler = (e: boolean) => {
+    props.Data.setIsSelectedUndermountSink(!e);
+  };
+  const OnInlaySinkChangeHandler = (e: boolean) => {
+    props.Data.setIsSelectedInlaySink(!e);
+  };
+  const OnCoarseSinkChangeHandler = (e: boolean) => {
+    props.Data.setIsSelectedCoarseSink(!e);
+  };
+
   return (
     <div className="grid gap-8">
       <div>
@@ -63,33 +143,25 @@ function MaterialSelect() {
             id="width"
             name="width"
             placeholder={"Breedte(m)"}
-            onChange={(e) => {
-              setWidth(Number(e.target.value));
-            }}
+            onChange={OnWidthChangeHandler}
           />
           <Input
             className="w-fit mx-2"
             id="length"
             name="length"
             placeholder={"Lengte(m)"}
-            onChange={(e) => {
-              setLength(Number(e.target.value));
-            }}
+            onChange={OnLengthChangeHandler}
           />
           <div className="flex mx-2">
             <p className="mr-2 text-lg font-medium">Boorgaten</p>{" "}
             <Input
-              onChange={(e) => {
-                setDrillholes(Number(e.target.value));
-              }}
+              onChange={OnDrillHolesChangeHandler}
             />
           </div>
           <div className="flex mx-2">
             <p className="mr-2 text-lg font-medium">Wandcontactdoos</p>{" "}
             <Input
-              onChange={(e) => {
-                setWallOutlet(Number(e.target.value));
-              }}
+              onChange={OnWallOutletChangeHandler}
             />
           </div>
         </div>
@@ -98,16 +170,12 @@ function MaterialSelect() {
           <Input
             className="mr-2"
             placeholder="Breedte(mm)"
-            onChange={(e) => {
-              setWallOutletWidth(Number(e.target.value));
-            }}
+            onChange={OnWallOutletWidthChangeHandler}
           />{" "}
           <Input
             className="mr-2"
             placeholder="Hoogte(mm)"
-            onChange={(e) => {
-              setWallOutletHeight(Number(e.target.value));
-            }}
+            onChange={OnWallOutletHeightChangeHandler}
           />
           <p className="mr-2 text-lg font-medium w-full">0 - 150mm</p>
         </div>
@@ -116,16 +184,12 @@ function MaterialSelect() {
           <Input
             className="mr-2"
             placeholder="Breedte(mm)"
-            onChange={(e) => {
-              setWindowsillWidth(Number(e.target.value));
-            }}
+            onChange={OnWindowsillWidthChangeHandler}
           />{" "}
           <Input
             className="mr-2"
             placeholder="Hoogte(mm)"
-            onChange={(e) => {
-              setWindowsillHeight(Number(e.target.value));
-            }}
+            onChange={OnWindowsillHeightChangeHandler}
           />
           <p className="mr-2 text-lg font-medium w-full">0 - 150mm</p>
         </div>
@@ -134,16 +198,12 @@ function MaterialSelect() {
           <Input
             className="mr-2"
             placeholder="Breedte(mm)"
-            onChange={(e) => {
-              setEdgingFinishWidth(Number(e.target.value));
-            }}
+            onChange={OnEdgingFinishWidthChangeHandler}
           />{" "}
           <Input
             className="mr-2"
             placeholder="Hoogte(mm)"
-            onChange={(e) => {
-              setEdgingFinishHeight(Number(e.target.value));
-            }}
+            onChange={OnEdgingFinishHeightChangeHandler}
           />
           <p className="mr-2 text-lg font-medium w-full">40 - 150mm</p>
         </div>
@@ -156,7 +216,10 @@ function MaterialSelect() {
               variant="outline"
               className={`flex-grow m-1 focus:outline-none ${isSelectedSinkHole ? "border-primary" : ""
                 }`}
-              onClick={() => toggleSelection(setIsSelectedSinkhole)}
+              onClick={() => {
+                OnSinkHoleChangeHandler(props.Data.isSelectedSinkHole);
+                toggleSelection(setIsSelectedSinkhole);
+              }}
             >
               Kraangat
             </Button>
@@ -164,7 +227,10 @@ function MaterialSelect() {
               variant="outline"
               className={`flex-grow m-1 focus:outline-none ${isSelectedSoapDispender ? "border-primary" : ""
                 }`}
-              onClick={() => toggleSelection(setIsSelectedSoapDispender)}
+              onClick={() => {
+                OnSoapDispenderChangeHandler(props.Data.isSelectedSoapDispender);
+                toggleSelection(setIsSelectedSoapDispender);
+              }}
             >
               Zeepdispenser
             </Button>
@@ -172,9 +238,7 @@ function MaterialSelect() {
             <Card className="flex w-2/5 flex-grow m-1">
               <p className="mx-2 pt-2 text-sm font-medium">Achterwand</p>{" "}
               <Input
-                onChange={(e) => {
-                  setRearWall(Number(e.target.value));
-                }}
+                onChange={OnRearWallChangeHandler}
               />
             </Card>
           </div>
@@ -183,7 +247,10 @@ function MaterialSelect() {
               variant="outline"
               className={`flex-grow m-1 focus:outline-none ${isSelectedUndermountSink ? "border-primary" : ""
                 }`}
-              onClick={() => toggleSelection(setIsSelectedUndermountSink)}
+              onClick={() => {
+                OnUndermountSinkChangeHandler(props.Data.isSelectedUndermountSink);
+                toggleSelection(setIsSelectedUndermountSink);
+              }}
             >
               Spoelback: onderbouw
             </Button>
@@ -191,7 +258,10 @@ function MaterialSelect() {
               variant="outline"
               className={`flex-grow m-1 focus:outline-none ${isSelectedInlaySink ? "border-primary" : ""
                 }`}
-              onClick={() => toggleSelection(setIsSelectedInlaySink)}
+              onClick={() => {
+                OnInlaySinkChangeHandler(props.Data.isSelectedInlaySink);
+                toggleSelection(setIsSelectedInlaySink);
+              }}
             >
               Spoelback: inleg
             </Button>
@@ -199,7 +269,10 @@ function MaterialSelect() {
               variant="outline"
               className={`flex-grow m-1 focus:outline-none ${isSelectedCoarseSink ? "border-primary" : ""
                 }`}
-              onClick={() => toggleSelection(setIsSelectedCoarseSink)}
+              onClick={() => {
+                OnCoarseSinkChangeHandler(props.Data.isSelectedCoarseSink);
+                toggleSelection(setIsSelectedCoarseSink);
+              }}
             >
               Spoelback: inleg
             </Button>
