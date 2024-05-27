@@ -1,5 +1,4 @@
 import Home from "./components/pages/home";
-import useReadCSV from "./functions/ReadCSV";
 
 function App() {
   return (
