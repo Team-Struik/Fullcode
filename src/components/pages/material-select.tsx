@@ -28,7 +28,38 @@ import { AlleMaterialen } from "./home";
 
 let lastId = 0;
 
-function MaterialSelect( ) {
+function MaterialSelect(props: {
+  Data: {
+    width: number | null;
+    setWidth: (arg0: number) => void;
+    length: number | null;
+    setLength: (arg0: number) => void;
+    drillholes: number | null;
+    setDrillholes: (arg0: number) => void;
+    wallOutlet: number | null;
+    setWallOutlet: (arg0: number) => void;
+    edgingFinishWidth: number | null;
+    setEdgingFinishWidth: (arg0: number) => void;
+    edgingFinishHeight: number | null;
+    setEdgingFinishHeight: (arg0: number) => void;
+    rearWall: number | null;
+    setRearWall: (arg0: number) => void;
+    windowsillWidth: number | null;
+    setWindowsillWidth: (arg0: number) => void;
+    windowsillHeight: number | null;
+    setWindowsillHeight: (arg0: number) => void;
+    isSelectedSinkHole: boolean;
+    setIsSelectedSinkhole: (arg0: boolean) => void;
+    isSelectedSoapDispender: boolean;
+    setIsSelectedSoapDispender: (arg0: boolean) => void;
+    isSelectedUndermountSink: boolean;
+    setIsSelectedUndermountSink: (arg0: boolean) => void;
+    isSelectedInlaySink: boolean;
+    setIsSelectedInlaySink: (arg0: boolean) => void;
+    isSelectedCoarseSink: boolean;
+    setIsSelectedCoarseSink: (arg0: boolean) => void;
+  }
+}) {
   // const materiaaldata = useReadCSV();
 
   const [material, setMaterial] = useState<Data>();
@@ -42,21 +73,21 @@ function MaterialSelect( ) {
   /////////////////////////////////////////////
   // Is dom maar laat staan voor nu. geloof me
   /////////////////////////////////////////////
-  const [width, setWidth] = useState<number | null>(null);
-  const [length, setLength] = useState<number | null>(null);
-  const [drillholes, setDrillholes] = useState<number | null>(null);
-  const [wallOutlet, setWallOutlet] = useState<number | null>(null);
-  const [wallOutletWidth, setWallOutletWidth] = useState<number | null>(null);
-  const [wallOutletHeight, setWallOutletHeight] = useState<number | null>(null);
-  const [edgingFinishWidth, setEdgingFinishWidth] = useState<number | null>(
-    null
-  );
-  const [edgingFinishHeight, setEdgingFinishHeight] = useState<number | null>(
-    null
-  );
-  const [rearWall, setRearWall] = useState<number | null>(null);
-  const [windowsillWidth, setWindowsillWidth] = useState<number | null>(null);
-  const [windowsillHeight, setWindowsillHeight] = useState<number | null>(null);
+  // const [width, setWidth] = useState<number | null>(null);
+  // const [length, setLength] = useState<number | null>(null);
+  // const [drillholes, setDrillholes] = useState<number | null>(null);
+  // const [wallOutlet, setWallOutlet] = useState<number | null>(null);
+  // const [wallOutletWidth, setWallOutletWidth] = useState<number | null>(null);
+  // const [wallOutletHeight, setWallOutletHeight] = useState<number | null>(null);
+  // const [edgingFinishWidth, setEdgingFinishWidth] = useState<number | null>(
+  //   null
+  // );
+  // const [edgingFinishHeight, setEdgingFinishHeight] = useState<number | null>(
+  //   null
+  // );
+  // const [rearWall, setRearWall] = useState<number | null>(null);
+  // const [windowsillWidth, setWindowsillWidth] = useState<number | null>(null);
+  // const [windowsillHeight, setWindowsillHeight] = useState<number | null>(null);
 
   const [isSelectedSinkHole, setIsSelectedSinkhole] = useState<boolean>(false);
   const [isSelectedSoapDispender, setIsSelectedSoapDispender] =
@@ -68,19 +99,19 @@ function MaterialSelect( ) {
   const [isSelectedCoarseSink, setIsSelectedCoarseSink] =
     useState<boolean>(false);
 
-  const prijs_per_m2 = width! * length! * material?.Prijs_per_m2!;
-  const drillprijs = drillholes! * material?.Boorgaten_per_stuk!;
-  const wallOutletPrijs = wallOutlet! * material?.WCD!;
+  const prijs_per_m2 = props.Data.width! * props.Data.length! * material?.Prijs_per_m2!;
+  const drillprijs = props.Data.drillholes! * material?.Boorgaten_per_stuk!;
+  const wallOutletPrijs = props.Data.wallOutlet! * material?.WCD!;
   const RandafwerkingPrijs =
-    edgingFinishWidth! * edgingFinishHeight! * material?.Randafwerking_pm!;
+    props.Data.edgingFinishWidth! * props.Data.edgingFinishHeight! * material?.Randafwerking_pm!;
   const VensterbankPrijs =
-    windowsillWidth! * windowsillHeight! * material?.Vensterbank_pm!;
+    props.Data.windowsillWidth! * props.Data.windowsillHeight! * material?.Vensterbank_pm!;
   // const [minimumspadrand, setminimumspadrand] = useState<number>();
   // const [maximumspadrand, setmaximumspadrand] = useState<number>();
   // const [minimumvensterbank, setminimumvensterbank] = useState<number>();
   // const [maximumvensterbank, setmaximumvensterbank] = useState<number>();
 
-  const AchterwandPrijs = rearWall! * material?.Achterwand_pm!;
+  const AchterwandPrijs = props.Data.rearWall! * material?.Achterwand_pm!;
   const SinkholePrijs = isSelectedSinkHole ? Number(material?.Kraangat!) : 0;
   const SoapDispenderPrijs = isSelectedSoapDispender
     ? Number(material?.Zeepdispenser!)
@@ -97,16 +128,16 @@ function MaterialSelect( ) {
 
   const totaal =
     prijs_per_m2 +
-      drillprijs +
-      wallOutletPrijs +
-      RandafwerkingPrijs +
-      VensterbankPrijs +
-      AchterwandPrijs +
-      SinkholePrijs +
-      SoapDispenderPrijs +
-      UndermountSinkPrijs +
-      InlaySinkPrijs +
-      CoarseSinkPrijs;
+    drillprijs +
+    wallOutletPrijs +
+    RandafwerkingPrijs +
+    VensterbankPrijs +
+    AchterwandPrijs +
+    SinkholePrijs +
+    SoapDispenderPrijs +
+    UndermountSinkPrijs +
+    InlaySinkPrijs +
+    CoarseSinkPrijs;
 
   const toggleSelection = (
     setter: React.Dispatch<React.SetStateAction<boolean>>
@@ -116,128 +147,112 @@ function MaterialSelect( ) {
 
   // Blad afmetingen
   const OnWidthChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // props.Data.setWidth(Number(event.target.value));
-    setWidth(Number(event.target.value));
+    props.Data.setWidth(Number(event.target.value));
+    // setWidth(Number(event.target.value));
   };
   const OnLengthChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // props.Data.setLength(Number(event.target.value));
-    setLength(Number(event.target.value));
+    props.Data.setLength(Number(event.target.value));
+    // setLength(Number(event.target.value));
   };
   // Aantal boorgaten
   const OnDrillHolesChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // props.Data.setDrillholes(Number(event.target.value));
-    setDrillholes(Number(event.target.value));
+    props.Data.setDrillholes(Number(event.target.value));
+    // setDrillholes(Number(event.target.value));
   };
   // Aantal wandcontactdozen
   const OnWallOutletChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // props.Data.setWallOutlet(Number(event.target.value));
-    setWallOutlet(Number(event.target.value));
-  };
-
-  // Wandcontactdoos afmetingen
-  const OnWallOutletWidthChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    // props.Data.setWallOutletWidth(Number(event.target.value));
-    setWallOutletWidth(Number(event.target.value));
-  };
-  const OnWallOutletHeightChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    // props.Data.setWallOutletHeight(Number(event.target.value));
-    setWallOutletHeight(Number(event.target.value));
+    props.Data.setWallOutlet(Number(event.target.value));
+    // setWallOutlet(Number(event.target.value));
   };
 
   // Vensterbank afmetingen
   const OnWindowsillWidthChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // props.Data.setWindowsillWidth(Number(event.target.value));
-    setWindowsillWidth(Number(event.target.value));
+    props.Data.setWindowsillWidth(Number(event.target.value));
+    // setWindowsillWidth(Number(event.target.value));
   };
 
   const OnWindowsillHeightChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // props.Data.setWindowsillHeight(Number(event.target.value));
-    setWindowsillHeight(Number(event.target.value));
+    props.Data.setWindowsillHeight(Number(event.target.value));
+    // setWindowsillHeight(Number(event.target.value));
   };
 
   // Randafwerking afmetingen
   const OnEdgingFinishWidthChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // props.Data.setEdgingFinishWidth(Number(event.target.value));
-    setEdgingFinishWidth(Number(event.target.value));
+    props.Data.setEdgingFinishWidth(Number(event.target.value));
+    // setEdgingFinishWidth(Number(event.target.value));
   };
   const OnEdgingFinishHeightChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // props.Data.setEdgingFinishHeight(Number(event.target.value));
-    setEdgingFinishHeight(Number(event.target.value));
+    props.Data.setEdgingFinishHeight(Number(event.target.value));
+    // setEdgingFinishHeight(Number(event.target.value));
   };
 
-  // // Kraangat
-  // const OnSinkHoleChangeHandler = (e: boolean) => {
-  //   // props.Data.setIsSelectedSinkhole(!e);
-  //   setIsSelectedSinkhole(!e);
-  // };
+  // Kraangat
+  const OnSinkHoleChangeHandler = (e: boolean) => {
+    // props.Data.setIsSelectedSinkhole(!e);
+    setIsSelectedSinkhole(!e);
+  };
 
-  // // Zeepdispenser
-  // const OnSoapDispenderChangeHandler = (e: boolean) => {
-  //   // props.Data.setIsSelectedSoapDispender(!e);
-  //   setIsSelectedSoapDispender(!e);
-  // };
+  // Zeepdispenser
+  const OnSoapDispenderChangeHandler = (e: boolean) => {
+    // props.Data.setIsSelectedSoapDispender(!e);
+    setIsSelectedSoapDispender(!e);
+  };
 
   // Achterwand
   const OnRearWallChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    // props.Data.setRearWall(Number(event.target.value));
-    setRearWall(Number(event.target.value));
+    props.Data.setRearWall(Number(event.target.value));
+    // setRearWall(Number(event.target.value));
   };
 
-  // // Spoelbakken
-  // const OnUndermountSinkChangeHandler = (e: boolean) => {
-  //   // props.Data.setIsSelectedUndermountSink(!e);
-  //   setIsSelectedUndermountSink(!e);
-  // };
-  // const OnInlaySinkChangeHandler = (e: boolean) => {
-  //   // props.Data.setIsSelectedInlaySink(!e);
-  //   setIsSelectedInlaySink(!e);
-  // };
-  // const OnCoarseSinkChangeHandler = (e: boolean) => {
-  //   // props.Data.setIsSelectedCoarseSink(!e);
-  //   setIsSelectedCoarseSink(!e);
-  // };
+  // Spoelbakken
+  const OnUndermountSinkChangeHandler = (e: boolean) => {
+    // props.Data.setIsSelectedUndermountSink(!e);
+    setIsSelectedUndermountSink(!e);
+  };
+  const OnInlaySinkChangeHandler = (e: boolean) => {
+    // props.Data.setIsSelectedInlaySink(!e);
+    setIsSelectedInlaySink(!e);
+  };
+  const OnCoarseSinkChangeHandler = (e: boolean) => {
+    // props.Data.setIsSelectedCoarseSink(!e);
+    setIsSelectedCoarseSink(!e);
+  };
 
   const handleClick = () => {
     const opties: GekozenOpties = {
       ID: lastId++,
       selectedMaterial: material?.Materiaalsoort!,
-      width,
-      length,
-      drillholes,
-      wallOutlet,
-      wallOutletWidth,
-      wallOutletHeight,
-      edgingFinishWidth,
-      edgingFinishHeight,
-      rearWall,
-      windowsillWidth,
-      windowsillHeight,
+      width: props.Data.width!,
+      length: props.Data.length!,
+      drillholes: props.Data.drillholes!,
+      wallOutlet: props.Data.wallOutlet!,
+      edgingFinishWidth: props.Data.edgingFinishWidth!,
+      edgingFinishHeight: props.Data.edgingFinishHeight!,
+      rearWall: props.Data.rearWall!,
+      windowsillWidth: props.Data.windowsillWidth!,
+      windowsillHeight: props.Data.windowsillHeight!,
       isSelectedSinkHole,
       isSelectedSoapDispender,
       isSelectedUndermountSink,
       isSelectedInlaySink,
       isSelectedCoarseSink,
-      TotalPrice: totaal,
+      TotalPrice: totaal
     };
     if (opties.selectedMaterial !== null) {
       AlleMaterialen.push(opties);
@@ -274,7 +289,7 @@ function MaterialSelect( ) {
               className="w-fit mr-2"
               id="width"
               name="width"
-              placeholder={width? width.toString() : "Breedte(m)"}
+              placeholder={props.Data.width ? props.Data.width.toString() : "Breedte(m)"}
               onChange={OnWidthChangeHandler}
             />
             <Input
@@ -302,24 +317,6 @@ function MaterialSelect( ) {
                 onChange={OnWallOutletChangeHandler}
               />
             </div>
-          </div>
-          <div className="flex mx-2">
-            <p className="mr-2 text-lg font-medium w-full">Wandcontactdoos</p>{" "}
-            <Input
-              type="number"
-              min={0}
-              className="mr-2"
-              placeholder="Breedte(mm)"
-              onChange={OnWallOutletWidthChangeHandler}
-            />{" "}
-            <Input
-              type="number"
-              min={0}
-              className="mr-2"
-              placeholder="Hoogte(mm)"
-              onChange={OnWallOutletHeightChangeHandler}
-            />
-            <p className="mr-2 text-lg font-medium w-full">0-150mm</p>
           </div>
           <div className="flex mx-2">
             <p className="mr-2 text-lg font-medium w-full">Vensterbank</p>{" "}

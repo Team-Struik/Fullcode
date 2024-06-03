@@ -31,8 +31,6 @@ export type GekozenOpties = {
     length: number | null;
     drillholes: number | null;
     wallOutlet: number | null;
-    wallOutletWidth: number | null;
-    wallOutletHeight: number | null;
     edgingFinishWidth: number | null;
     edgingFinishHeight: number | null;
     rearWall: number | null;
