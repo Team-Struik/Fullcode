@@ -1,5 +1,6 @@
 import { useState } from "react";
 import MaterialSelect from "./material-select";
+import Preview from "./preview";
 import { AlleMaterialen } from "./home";
 
 function MaterialSelectPage() {
@@ -73,7 +74,7 @@ function MaterialSelectPage() {
                 </div>
                 <MaterialSelect Data={Alldata} />
             </div>
-            <div></div> {/* PDF */}
+            <div><Preview /></div>
         </div>
     );
 }
