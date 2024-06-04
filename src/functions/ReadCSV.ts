@@ -2,7 +2,7 @@ import { ParseResult } from "papaparse";
 import { useState, useEffect } from "react";
 import Papa from "papaparse";
 
-type Data = {
+export type Data = {
     Materiaalsoort: string;
     Spatrand: string;
     Vensterbank: string;
@@ -22,6 +22,26 @@ type Data = {
     WCD: number;
     Achterwand_pm: number;
     Randafwerking_pm_optie2: number;
+};
+
+export type GekozenOpties = {
+    ID: number;
+    selectedMaterial: string | null;
+    width: number | null;
+    length: number | null;
+    drillholes: number | null;
+    wallOutlet: number | null;
+    edgingFinishWidth: number | null;
+    edgingFinishHeight: number | null;
+    rearWall: number | null;
+    windowsillWidth: number | null;
+    windowsillHeight: number | null;
+    isSelectedSinkHole: boolean;
+    isSelectedSoapDispender: boolean;
+    isSelectedUndermountSink: boolean;
+    isSelectedInlaySink: boolean;
+    isSelectedCoarseSink: boolean;
+    TotalPrice: number | null;
 };
 
 type Values = {
