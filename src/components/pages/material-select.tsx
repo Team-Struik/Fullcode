@@ -73,22 +73,6 @@ function MaterialSelect(props: {
   /////////////////////////////////////////////
   // Is dom maar laat staan voor nu. geloof me
   /////////////////////////////////////////////
-  // const [width, setWidth] = useState<number | null>(null);
-  // const [length, setLength] = useState<number | null>(null);
-  // const [drillholes, setDrillholes] = useState<number | null>(null);
-  // const [wallOutlet, setWallOutlet] = useState<number | null>(null);
-  // const [wallOutletWidth, setWallOutletWidth] = useState<number | null>(null);
-  // const [wallOutletHeight, setWallOutletHeight] = useState<number | null>(null);
-  // const [edgingFinishWidth, setEdgingFinishWidth] = useState<number | null>(
-  //   null
-  // );
-  // const [edgingFinishHeight, setEdgingFinishHeight] = useState<number | null>(
-  //   null
-  // );
-  // const [rearWall, setRearWall] = useState<number | null>(null);
-  // const [windowsillWidth, setWindowsillWidth] = useState<number | null>(null);
-  // const [windowsillHeight, setWindowsillHeight] = useState<number | null>(null);
-
   const [isSelectedSinkHole, setIsSelectedSinkhole] = useState<boolean>(false);
   const [isSelectedSoapDispender, setIsSelectedSoapDispender] =
     useState<boolean>(false);
@@ -106,23 +90,19 @@ function MaterialSelect(props: {
     props.Data.edgingFinishWidth! * props.Data.edgingFinishHeight! * material?.Randafwerking_pm!;
   const VensterbankPrijs =
     props.Data.windowsillWidth! * props.Data.windowsillHeight! * material?.Vensterbank_pm!;
-  // const [minimumspadrand, setminimumspadrand] = useState<number>();
-  // const [maximumspadrand, setmaximumspadrand] = useState<number>();
-  // const [minimumvensterbank, setminimumvensterbank] = useState<number>();
-  // const [maximumvensterbank, setmaximumvensterbank] = useState<number>();
 
   const AchterwandPrijs = props.Data.rearWall! * material?.Achterwand_pm!;
-  const SinkholePrijs = isSelectedSinkHole ? Number(material?.Kraangat!) : 0;
-  const SoapDispenderPrijs = isSelectedSoapDispender
+  const SinkholePrijs = props.Data.isSelectedSinkHole ? Number(material?.Kraangat!) : 0;
+  const SoapDispenderPrijs = props.Data.isSelectedSoapDispender
     ? Number(material?.Zeepdispenser!)
     : 0;
-  const UndermountSinkPrijs = isSelectedUndermountSink
+  const UndermountSinkPrijs = props.Data.isSelectedUndermountSink
     ? Number(material?.Uitsparing_onderbouw!)
     : 0;
-  const InlaySinkPrijs = isSelectedInlaySink
+  const InlaySinkPrijs = props.Data.isSelectedInlaySink
     ? Number(material?.Uitsparing_inleg!)
     : 0;
-  const CoarseSinkPrijs = isSelectedCoarseSink
+  const CoarseSinkPrijs = props.Data.isSelectedCoarseSink
     ? Number(material?.Uitsparing_ruw!)
     : 0;
 
@@ -148,27 +128,25 @@ function MaterialSelect(props: {
   // Blad afmetingen
   const OnWidthChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.Data.setWidth(Number(event.target.value));
-    // setWidth(Number(event.target.value));
   };
   const OnLengthChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     props.Data.setLength(Number(event.target.value));
-    // setLength(Number(event.target.value));
   };
+
   // Aantal boorgaten
   const OnDrillHolesChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     props.Data.setDrillholes(Number(event.target.value));
-    // setDrillholes(Number(event.target.value));
   };
+
   // Aantal wandcontactdozen
   const OnWallOutletChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     props.Data.setWallOutlet(Number(event.target.value));
-    // setWallOutlet(Number(event.target.value));
   };
 
   // Vensterbank afmetingen
@@ -176,14 +154,11 @@ function MaterialSelect(props: {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     props.Data.setWindowsillWidth(Number(event.target.value));
-    // setWindowsillWidth(Number(event.target.value));
   };
-
   const OnWindowsillHeightChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     props.Data.setWindowsillHeight(Number(event.target.value));
-    // setWindowsillHeight(Number(event.target.value));
   };
 
   // Randafwerking afmetingen
@@ -191,25 +166,21 @@ function MaterialSelect(props: {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     props.Data.setEdgingFinishWidth(Number(event.target.value));
-    // setEdgingFinishWidth(Number(event.target.value));
   };
   const OnEdgingFinishHeightChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     props.Data.setEdgingFinishHeight(Number(event.target.value));
-    // setEdgingFinishHeight(Number(event.target.value));
   };
 
   // Kraangat
   const OnSinkHoleChangeHandler = (e: boolean) => {
-    // props.Data.setIsSelectedSinkhole(!e);
-    setIsSelectedSinkhole(!e);
+    props.Data.setIsSelectedSinkhole(!e);
   };
 
   // Zeepdispenser
   const OnSoapDispenderChangeHandler = (e: boolean) => {
-    // props.Data.setIsSelectedSoapDispender(!e);
-    setIsSelectedSoapDispender(!e);
+    props.Data.setIsSelectedSoapDispender(!e);
   };
 
   // Achterwand
@@ -217,21 +188,17 @@ function MaterialSelect(props: {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     props.Data.setRearWall(Number(event.target.value));
-    // setRearWall(Number(event.target.value));
   };
 
   // Spoelbakken
   const OnUndermountSinkChangeHandler = (e: boolean) => {
-    // props.Data.setIsSelectedUndermountSink(!e);
-    setIsSelectedUndermountSink(!e);
+    props.Data.setIsSelectedUndermountSink(!e);
   };
   const OnInlaySinkChangeHandler = (e: boolean) => {
-    // props.Data.setIsSelectedInlaySink(!e);
-    setIsSelectedInlaySink(!e);
+    props.Data.setIsSelectedInlaySink(!e);
   };
   const OnCoarseSinkChangeHandler = (e: boolean) => {
-    // props.Data.setIsSelectedCoarseSink(!e);
-    setIsSelectedCoarseSink(!e);
+    props.Data.setIsSelectedCoarseSink(!e);
   };
 
   const handleClick = () => {
@@ -367,8 +334,7 @@ function MaterialSelect(props: {
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedSinkHole ? "border-primary" : ""}`}
                 onClick={() => {
-                  // OnSinkHoleChangeHandler(props.Data.isSelectedSinkHole);
-                  // OnSinkHoleChangeHandler(isSelectedSinkHole);
+                  OnSinkHoleChangeHandler(props.Data.isSelectedSinkHole);
                   toggleSelection(setIsSelectedSinkhole);
                 }}
               >
@@ -378,10 +344,7 @@ function MaterialSelect(props: {
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedSoapDispender ? "border-primary" : ""}`}
                 onClick={() => {
-                  // OnSoapDispenderChangeHandler(
-                  //   // props.Data.isSelectedSoapDispender
-                  //   isSelectedSoapDispender
-                  // );
+                  OnSoapDispenderChangeHandler(props.Data.isSelectedSoapDispender);
                   toggleSelection(setIsSelectedSoapDispender);
                 }}
               >
@@ -402,10 +365,7 @@ function MaterialSelect(props: {
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedUndermountSink ? "border-primary" : ""}`}
                 onClick={() => {
-                  // OnUndermountSinkChangeHandler(
-                  //   // props.Data.isSelectedUndermountSink
-                  //   isSelectedUndermountSink
-                  // );
+                  OnUndermountSinkChangeHandler(props.Data.isSelectedUndermountSink);
                   toggleSelection(setIsSelectedUndermountSink);
                 }}
               >
@@ -415,8 +375,7 @@ function MaterialSelect(props: {
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedInlaySink ? "border-primary" : ""}`}
                 onClick={() => {
-                  // OnInlaySinkChangeHandler(props.Data.isSelectedInlaySink);
-                  // OnInlaySinkChangeHandler(isSelectedInlaySink);
+                  OnInlaySinkChangeHandler(props.Data.isSelectedInlaySink);
                   toggleSelection(setIsSelectedInlaySink);
                 }}
               >
@@ -426,8 +385,7 @@ function MaterialSelect(props: {
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedCoarseSink ? "border-primary" : ""}`}
                 onClick={() => {
-                  // OnCoarseSinkChangeHandler(props.Data.isSelectedCoarseSink);
-                  // OnCoarseSinkChangeHandler(isSelectedCoarseSink);
+                  OnCoarseSinkChangeHandler(props.Data.isSelectedCoarseSink);
                   toggleSelection(setIsSelectedCoarseSink);
                 }}
               >
