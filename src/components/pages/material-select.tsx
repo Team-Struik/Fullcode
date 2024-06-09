@@ -30,6 +30,8 @@ let lastId = 0;
 
 function MaterialSelect(props: {
   Data: {
+    selectedMaterial: string | null;
+    setSelectedMaterial: (arg0: string) => void;
     width: number | null;
     setWidth: (arg0: number) => void;
     length: number | null;
@@ -235,7 +237,10 @@ function MaterialSelect(props: {
     <>
       <div className="grid gap-8">
         <div>
-          <Select onValueChange={(value) => SetMatByName(value)}>
+          <Select onValueChange={(value) => {
+            SetMatByName(value);
+            props.Data.setSelectedMaterial(value);
+          }}>
             <SelectTrigger className="w-fit">
               <SelectValue placeholder="Selecteer materiaal" />
             </SelectTrigger>
