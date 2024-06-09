@@ -58,6 +58,8 @@ function MaterialSelect(props: {
     setIsSelectedInlaySink: (arg0: boolean) => void;
     isSelectedCoarseSink: boolean;
     setIsSelectedCoarseSink: (arg0: boolean) => void;
+    totalPrice: number | null;
+    setTotalPrice: (arg0: number) => void;
   }
 }) {
   // const materiaaldata = useReadCSV();
@@ -118,6 +120,8 @@ function MaterialSelect(props: {
     UndermountSinkPrijs +
     InlaySinkPrijs +
     CoarseSinkPrijs;
+
+  props.Data.setTotalPrice(totaal);
 
   const toggleSelection = (
     setter: React.Dispatch<React.SetStateAction<boolean>>
@@ -219,7 +223,7 @@ function MaterialSelect(props: {
       isSelectedUndermountSink,
       isSelectedInlaySink,
       isSelectedCoarseSink,
-      TotalPrice: totaal
+      TotalPrice: props.Data.totalPrice!
     };
     if (opties.selectedMaterial !== null) {
       AlleMaterialen.push(opties);

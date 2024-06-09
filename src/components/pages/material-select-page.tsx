@@ -30,6 +30,8 @@ function MaterialSelectPage() {
     const [isSelectedCoarseSink, setIsSelectedCoarseSink] =
         useState<boolean>(false);
 
+    const [totalPrice, setTotalPrice] = useState<number | null>(null);
+
     const Alldata = {
         selectedMaterial,
         setSelectedMaterial,
@@ -61,8 +63,11 @@ function MaterialSelectPage() {
         setIsSelectedInlaySink,
         isSelectedCoarseSink,
         setIsSelectedCoarseSink,
+        totalPrice,
+        setTotalPrice
     };
-    console.log(AlleMaterialen)
+    // console.log(AlleMaterialen)
+    console.log(totalPrice);
     return (
         <div className="grid-container grid h-screen grid-cols-2">
             <div className="px-8 py-4 border-r-2 h-screen">
