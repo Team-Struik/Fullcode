@@ -69,8 +69,7 @@ function MaterialSelectPage() {
         totalPrice,
         setTotalPrice
     };
-    console.log(AlleMaterialen)
-    console.log(selectedMaterial);
+
     return (
         <div className="grid-container grid h-screen grid-cols-2">
             <div className="px-8 py-4 border-r-2 h-screen">
