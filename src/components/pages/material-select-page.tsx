@@ -2,6 +2,7 @@ import { useState } from "react";
 import MaterialSelect from "./material-select";
 import Preview from "./preview";
 import { AlleMaterialen } from "./home";
+import { usePDF } from "react-to-pdf";
 
 function MaterialSelectPage() {
     const [gekozenOpties, setGekozenOpties] = useState(null);
@@ -32,6 +33,11 @@ function MaterialSelectPage() {
         useState<boolean>(false);
 
     const [totalPrice, setTotalPrice] = useState<number | null>(null);
+
+    const { toPDF, targetRef } = usePDF({ filename: 'blis-digital-offerte.pdf' });
+    const handlePrint = () => {
+        toPDF();
+    }
 
     const Alldata = {
         selectedMaterial,
@@ -67,7 +73,8 @@ function MaterialSelectPage() {
         isSelectedCoarseSink,
         setIsSelectedCoarseSink,
         totalPrice,
-        setTotalPrice
+        setTotalPrice,
+        handlePrint
     };
 
     return (
@@ -81,7 +88,8 @@ function MaterialSelectPage() {
                 </div>
                 <MaterialSelect Data={Alldata} />
             </div>
-            <div><Preview Data={Alldata} /></div>
+            <div ref={targetRef}><Preview Data={Alldata} /></div>
+            <button onClick={() => toPDF()}>Download PDF</button>
         </div>
     );
 }

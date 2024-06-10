@@ -33,6 +33,7 @@ let sinkButton3 = false;
 
 function MaterialSelect(props: {
   Data: {
+    handlePrint(): void;
     selectedMaterial: string | null;
     setSelectedMaterial: (arg0: string) => void;
     price_per_m2: number | null;
@@ -446,7 +447,11 @@ function MaterialSelect(props: {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-              <Button variant="outline" size="lg" onClick={handleClick}>
+              <Button variant="outline" size="lg" onClick={() => {
+                handleClick;
+                props.Data.handlePrint();
+                navigate(-1);
+              }}>
                 Toevoegen
               </Button>
             </div>
