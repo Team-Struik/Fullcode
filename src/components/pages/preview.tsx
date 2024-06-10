@@ -196,7 +196,7 @@ function Preview(props: {
                         <p className='w-48 text-xs font-bold text-black'>Spoelbak: {selected_sink()!}</p>
                         <p className='w-52 text-xs font-bold text-black'>{props.Data.isSelectedCoarseSink || props.Data.isSelectedInlaySink || props.Data.isSelectedUndermountSink ? "Ja" : "Nee"}</p>
                         <p className='w-20 text-xs font-bold text-black'>€{get_price_sink()}</p>
-                        <p className='text-xs font-bold text-black'>€{get_price_sink()}</p>
+                        <p className='text-xs font-bold text-black'>€{get_price_sink() == null ? "0.00" : get_price_sink()}</p>
                     </div>
                     <div className='px-12 pt-5' dir='rtl'>
                         <h1 className='text-l font-bold text-black'>Totaal: €{props.Data.totalPrice?.toFixed(2)}</h1>
