@@ -11,7 +11,6 @@ function App() {
           </h1>
         </div>
         <Home />
-        {/* <MaterialSelect /> */}
       </div>
       <div>test</div>
     </div>

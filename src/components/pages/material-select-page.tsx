@@ -89,7 +89,6 @@ function MaterialSelectPage() {
                 <MaterialSelect Data={Alldata} />
             </div>
             <div ref={targetRef}><Preview Data={Alldata} /></div>
-            <button onClick={() => toPDF()}>Download PDF</button>
         </div>
     );
 }
