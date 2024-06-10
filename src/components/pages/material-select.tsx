@@ -27,6 +27,9 @@ import {
 import { AlleMaterialen } from "./home";
 
 let lastId = 0;
+let sinkButton1 = false;
+let sinkButton2 = false;
+let sinkButton3 = false;
 
 function MaterialSelect(props: {
   Data: {
@@ -374,7 +377,10 @@ function MaterialSelect(props: {
               <Button
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedUndermountSink ? "border-primary" : ""}`}
+                disabled={sinkButton1}
                 onClick={() => {
+                  sinkButton2 = !sinkButton2;
+                  sinkButton3 = !sinkButton3;
                   OnUndermountSinkChangeHandler(props.Data.isSelectedUndermountSink);
                   toggleSelection(setIsSelectedUndermountSink);
                 }}
@@ -384,7 +390,10 @@ function MaterialSelect(props: {
               <Button
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedInlaySink ? "border-primary" : ""}`}
+                disabled={sinkButton2}
                 onClick={() => {
+                  sinkButton1 = !sinkButton1;
+                  sinkButton3 = !sinkButton3;
                   OnInlaySinkChangeHandler(props.Data.isSelectedInlaySink);
                   toggleSelection(setIsSelectedInlaySink);
                 }}
@@ -394,7 +403,10 @@ function MaterialSelect(props: {
               <Button
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedCoarseSink ? "border-primary" : ""}`}
+                disabled={sinkButton3}
                 onClick={() => {
+                  sinkButton1 = !sinkButton1;
+                  sinkButton2 = !sinkButton2;
                   OnCoarseSinkChangeHandler(props.Data.isSelectedCoarseSink);
                   toggleSelection(setIsSelectedCoarseSink);
                 }}
