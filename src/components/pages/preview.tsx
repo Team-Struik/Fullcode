@@ -1,5 +1,5 @@
 import Logo from '../../assets/blisdigital-logo.svg';
-import useReadCSV from '@/functions/ReadCSV';
+import useReadCSV from '../../functions/ReadCSV';
 
 function Preview(props: {
     Data: {
