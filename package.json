@@ -29,6 +29,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.6",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.7",
     "@types/papaparse": "^5.3.14",

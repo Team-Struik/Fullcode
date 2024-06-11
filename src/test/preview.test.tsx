@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { toBeInTheDocument } from '@testing-library/jest-dom/extend-expect'; // Import the toBeInTheDocument function
 import Preview from '../components/pages/preview';
 
 describe('Preview', () => {
@@ -43,6 +44,7 @@ describe('Preview', () => {
             },
         };
 
-        expect(() => render(<Preview {...mockProps} />)).not.toThrow();
+        render(<Preview {...mockProps} />);
+        expect(screen.getByText('Preview')).toBeInTheDocument();
     });
 });
