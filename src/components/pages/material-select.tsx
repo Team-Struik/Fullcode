@@ -27,9 +27,17 @@ import {
 import { AlleMaterialen } from "./home";
 
 let lastId = 0;
+let sinkButton1 = false;
+let sinkButton2 = false;
+let sinkButton3 = false;
 
 function MaterialSelect(props: {
   Data: {
+    handlePrint(): void;
+    selectedMaterial: string | null;
+    setSelectedMaterial: (arg0: string) => void;
+    price_per_m2: number | null;
+    set_Price_per_m2: (arg0: number) => void;
     width: number | null;
     setWidth: (arg0: number) => void;
     length: number | null;
@@ -40,14 +48,14 @@ function MaterialSelect(props: {
     setWallOutlet: (arg0: number) => void;
     edgingFinishWidth: number | null;
     setEdgingFinishWidth: (arg0: number) => void;
-    edgingFinishHeight: number | null;
-    setEdgingFinishHeight: (arg0: number) => void;
+    edgingFinishLength: number | null;
+    setEdgingFinishLength: (arg0: number) => void;
     rearWall: number | null;
     setRearWall: (arg0: number) => void;
     windowsillWidth: number | null;
     setWindowsillWidth: (arg0: number) => void;
-    windowsillHeight: number | null;
-    setWindowsillHeight: (arg0: number) => void;
+    windowsillLength: number | null;
+    setWindowsillLength: (arg0: number) => void;
     isSelectedSinkHole: boolean;
     setIsSelectedSinkhole: (arg0: boolean) => void;
     isSelectedSoapDispender: boolean;
@@ -58,6 +66,8 @@ function MaterialSelect(props: {
     setIsSelectedInlaySink: (arg0: boolean) => void;
     isSelectedCoarseSink: boolean;
     setIsSelectedCoarseSink: (arg0: boolean) => void;
+    totalPrice: number | null;
+    setTotalPrice: (arg0: number) => void;
   }
 }) {
   // const materiaaldata = useReadCSV();
@@ -86,10 +96,8 @@ function MaterialSelect(props: {
   const prijs_per_m2 = props.Data.width! * props.Data.length! * material?.Prijs_per_m2!;
   const drillprijs = props.Data.drillholes! * material?.Boorgaten_per_stuk!;
   const wallOutletPrijs = props.Data.wallOutlet! * material?.WCD!;
-  const RandafwerkingPrijs =
-    props.Data.edgingFinishWidth! * props.Data.edgingFinishHeight! * material?.Randafwerking_pm!;
-  const VensterbankPrijs =
-    props.Data.windowsillWidth! * props.Data.windowsillHeight! * material?.Vensterbank_pm!;
+  const RandafwerkingPrijs = props.Data.edgingFinishLength! * material?.Randafwerking_pm!;
+  const VensterbankPrijs = props.Data.windowsillLength! * material?.Vensterbank_pm!;
 
   const AchterwandPrijs = props.Data.rearWall! * material?.Achterwand_pm!;
   const SinkholePrijs = props.Data.isSelectedSinkHole ? Number(material?.Kraangat!) : 0;
@@ -118,6 +126,8 @@ function MaterialSelect(props: {
     UndermountSinkPrijs +
     InlaySinkPrijs +
     CoarseSinkPrijs;
+
+  props.Data.setTotalPrice(totaal);
 
   const toggleSelection = (
     setter: React.Dispatch<React.SetStateAction<boolean>>
@@ -155,10 +165,10 @@ function MaterialSelect(props: {
   ) => {
     props.Data.setWindowsillWidth(Number(event.target.value));
   };
-  const OnWindowsillHeightChangeHandler = (
+  const OnWindowsillLengthChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    props.Data.setWindowsillHeight(Number(event.target.value));
+    props.Data.setWindowsillLength(Number(event.target.value));
   };
 
   // Randafwerking afmetingen
@@ -167,10 +177,10 @@ function MaterialSelect(props: {
   ) => {
     props.Data.setEdgingFinishWidth(Number(event.target.value));
   };
-  const OnEdgingFinishHeightChangeHandler = (
+  const OnEdgingFinishLengthChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    props.Data.setEdgingFinishHeight(Number(event.target.value));
+    props.Data.setEdgingFinishLength(Number(event.target.value));
   };
 
   // Kraangat
@@ -210,16 +220,16 @@ function MaterialSelect(props: {
       drillholes: props.Data.drillholes!,
       wallOutlet: props.Data.wallOutlet!,
       edgingFinishWidth: props.Data.edgingFinishWidth!,
-      edgingFinishHeight: props.Data.edgingFinishHeight!,
+      edgingFinishHeight: props.Data.edgingFinishLength!,
       rearWall: props.Data.rearWall!,
       windowsillWidth: props.Data.windowsillWidth!,
-      windowsillHeight: props.Data.windowsillHeight!,
+      windowsillHeight: props.Data.windowsillLength!,
       isSelectedSinkHole,
       isSelectedSoapDispender,
       isSelectedUndermountSink,
       isSelectedInlaySink,
       isSelectedCoarseSink,
-      TotalPrice: totaal
+      TotalPrice: props.Data.totalPrice!
     };
     if (opties.selectedMaterial !== null) {
       AlleMaterialen.push(opties);
@@ -231,7 +241,10 @@ function MaterialSelect(props: {
     <>
       <div className="grid gap-8">
         <div>
-          <Select onValueChange={(value) => SetMatByName(value)}>
+          <Select onValueChange={(value) => {
+            SetMatByName(value);
+            props.Data.setSelectedMaterial(value);
+          }}>
             <SelectTrigger className="w-fit">
               <SelectValue placeholder="Selecteer materiaal" />
             </SelectTrigger>
@@ -293,13 +306,13 @@ function MaterialSelect(props: {
               className="mr-2"
               placeholder="Breedte(mm)"
               onChange={OnWindowsillWidthChangeHandler}
-            />{" "}
+            />
             <Input
               type="number"
               min={0}
               className="mr-2"
-              placeholder="Hoogte(mm)"
-              onChange={OnWindowsillHeightChangeHandler}
+              placeholder="Lengte (m)"
+              onChange={OnWindowsillLengthChangeHandler}
             />
             <p className="mr-2 text-lg font-medium w-full">
               {material?.Vensterbank ? material.Vensterbank : "0 - 150mm"}
@@ -318,8 +331,8 @@ function MaterialSelect(props: {
               type="number"
               min={0}
               className="mr-2"
-              placeholder="Hoogte(mm)"
-              onChange={OnEdgingFinishHeightChangeHandler}
+              placeholder="Lengte (m)"
+              onChange={OnEdgingFinishLengthChangeHandler}
             />
             <p className="mr-2 text-lg font-medium w-full">
               {material?.Spatrand ? material?.Spatrand : "0 - 150mm"}
@@ -356,6 +369,7 @@ function MaterialSelect(props: {
                 <Input
                   type="number"
                   min={0}
+                  placeholder="Lengte (m)"
                   onChange={OnRearWallChangeHandler}
                 />
               </Card>
@@ -364,7 +378,10 @@ function MaterialSelect(props: {
               <Button
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedUndermountSink ? "border-primary" : ""}`}
+                disabled={sinkButton1}
                 onClick={() => {
+                  sinkButton2 = !sinkButton2;
+                  sinkButton3 = !sinkButton3;
                   OnUndermountSinkChangeHandler(props.Data.isSelectedUndermountSink);
                   toggleSelection(setIsSelectedUndermountSink);
                 }}
@@ -374,7 +391,10 @@ function MaterialSelect(props: {
               <Button
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedInlaySink ? "border-primary" : ""}`}
+                disabled={sinkButton2}
                 onClick={() => {
+                  sinkButton1 = !sinkButton1;
+                  sinkButton3 = !sinkButton3;
                   OnInlaySinkChangeHandler(props.Data.isSelectedInlaySink);
                   toggleSelection(setIsSelectedInlaySink);
                 }}
@@ -384,12 +404,15 @@ function MaterialSelect(props: {
               <Button
                 variant="outline"
                 className={`flex-grow m-1 focus:outline-none ${isSelectedCoarseSink ? "border-primary" : ""}`}
+                disabled={sinkButton3}
                 onClick={() => {
+                  sinkButton1 = !sinkButton1;
+                  sinkButton2 = !sinkButton2;
                   OnCoarseSinkChangeHandler(props.Data.isSelectedCoarseSink);
                   toggleSelection(setIsSelectedCoarseSink);
                 }}
               >
-                Spoelbak: inleg
+                Spoelbak: ruw
               </Button>
             </div>
           </div>
@@ -424,7 +447,11 @@ function MaterialSelect(props: {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-              <Button variant="outline" size="lg" onClick={handleClick}>
+              <Button variant="outline" size="lg" onClick={() => {
+                handleClick;
+                props.Data.handlePrint();
+                navigate(-1);
+              }}>
                 Toevoegen
               </Button>
             </div>

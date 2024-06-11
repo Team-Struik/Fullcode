@@ -1,10 +1,13 @@
 import { useState } from "react";
 import MaterialSelect from "./material-select";
+import Preview from "./preview";
 import { AlleMaterialen } from "./home";
+import { usePDF } from "react-to-pdf";
 
 function MaterialSelectPage() {
     const [gekozenOpties, setGekozenOpties] = useState(null);
     const [selectedMaterial, setSelectedMaterial] = useState<string | null>(null);
+    const [price_per_m2, set_Price_per_m2] = useState<number | null>(null);
     const [width, setWidth] = useState<number | null>(null);
     const [length, setLength] = useState<number | null>(null);
     const [drillholes, setDrillholes] = useState<number | null>(null);
@@ -12,12 +15,12 @@ function MaterialSelectPage() {
     const [edgingFinishWidth, setEdgingFinishWidth] = useState<number | null>(
         null,
     );
-    const [edgingFinishHeight, setEdgingFinishHeight] = useState<number | null>(
+    const [edgingFinishLength, setEdgingFinishLength] = useState<number | null>(
         null,
     );
     const [rearWall, setRearWall] = useState<number | null>(null);
     const [windowsillWidth, setWindowsillWidth] = useState<number | null>(null);
-    const [windowsillHeight, setWindowsillHeight] = useState<number | null>(null);
+    const [windowsillLenght, setWindowsillLenght] = useState<number | null>(null);
 
     const [isSelectedSinkHole, setIsSelectedSinkhole] = useState<boolean>(false);
     const [isSelectedSoapDispender, setIsSelectedSoapDispender] =
@@ -29,9 +32,18 @@ function MaterialSelectPage() {
     const [isSelectedCoarseSink, setIsSelectedCoarseSink] =
         useState<boolean>(false);
 
+    const [totalPrice, setTotalPrice] = useState<number | null>(null);
+
+    const { toPDF, targetRef } = usePDF({ filename: 'blis-digital-offerte.pdf' });
+    const handlePrint = () => {
+        toPDF();
+    }
+
     const Alldata = {
         selectedMaterial,
         setSelectedMaterial,
+        price_per_m2,
+        set_Price_per_m2,
         width,
         setWidth,
         length,
@@ -42,14 +54,14 @@ function MaterialSelectPage() {
         setWallOutlet,
         edgingFinishWidth,
         setEdgingFinishWidth,
-        edgingFinishHeight,
-        setEdgingFinishHeight,
+        edgingFinishLength: edgingFinishLength,
+        setEdgingFinishLength: setEdgingFinishLength,
         rearWall,
         setRearWall,
         windowsillWidth,
         setWindowsillWidth,
-        windowsillHeight,
-        setWindowsillHeight,
+        windowsillLength: windowsillLenght,
+        setWindowsillLength: setWindowsillLenght,
         isSelectedSinkHole,
         setIsSelectedSinkhole,
         isSelectedSoapDispender,
@@ -60,8 +72,11 @@ function MaterialSelectPage() {
         setIsSelectedInlaySink,
         isSelectedCoarseSink,
         setIsSelectedCoarseSink,
+        totalPrice,
+        setTotalPrice,
+        handlePrint
     };
-    console.log(AlleMaterialen)
+
     return (
         <div className="grid-container grid h-screen grid-cols-2">
             <div className="px-8 py-4 border-r-2 h-screen">
@@ -73,7 +88,7 @@ function MaterialSelectPage() {
                 </div>
                 <MaterialSelect Data={Alldata} />
             </div>
-            <div></div> {/* PDF */}
+            <div ref={targetRef}><Preview Data={Alldata} /></div>
         </div>
     );
 }
