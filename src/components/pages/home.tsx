@@ -31,8 +31,6 @@ function Home() {
   // };
   console.log(AlleMaterialen);
 
-  
-
   return (
     <>
       <div className="py-8 grid gap-2">
@@ -75,9 +73,7 @@ function Home() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Terug</AlertDialogCancel>
-                      <AlertDialogAction>
-                        Verwijderen
-                      </AlertDialogAction>
+                      <AlertDialogAction>Verwijderen</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
