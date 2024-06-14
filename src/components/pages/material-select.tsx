@@ -308,44 +308,51 @@ function MaterialSelect(props: {
             </div>
           </div>
           <div className="flex mx-2">
-            <p className="mr-2 text-lg font-medium w-full">Vensterbank</p>{" "}
+            <p className="mr-40 text-lg font-medium">Vensterbank</p>{" "}
+            <div className="mr-1.5"></div>
+            <p className="mr-4 text-lg font-medium text-nowrap">
+              {material?.Vensterbank ? material.Vensterbank : "0 - 150mm"}
+            </p>
             <Input
               type="number"
               min={0}
-              className="mr-2"
+              className="mr-2 max-w-fit"
               placeholder="Breedte(mm)"
               onChange={OnWindowsillWidthChangeHandler}
             />
             <Input
               type="number"
               min={0}
-              className="mr-2"
+              className="mr-2 max-w-fit"
               placeholder="Lengte (m)"
               onChange={OnWindowsillLengthChangeHandler}
             />
-            <p className="mr-2 text-lg font-medium w-full">
+            {/* <p className="mr-2 text-lg font-medium w-full">
               {material?.Vensterbank ? material.Vensterbank : "0 - 150mm"}
-            </p>
+            </p> */}
           </div>
           <div className="flex mx-2">
-            <p className="mr-2 text-lg font-medium w-full">Randafwerking</p>{" "}
+            <p className="mr-36 text-lg font-medium">Randafwerking</p>{" "}
+            <p className="mr-4 text-lg font-medium text-nowrap">
+              {material?.Spatrand ? material?.Spatrand : "0 - 150mm"}
+            </p>
             <Input
               type="number"
               min={0}
-              className="mr-2"
+              className="mr-2 max-w-fit"
               placeholder="Breedte(mm)"
               onChange={OnEdgingFinishWidthChangeHandler}
             />{" "}
             <Input
               type="number"
               min={0}
-              className="mr-2"
+              className="mr-2 max-w-fit"
               placeholder="Lengte (m)"
               onChange={OnEdgingFinishLengthChangeHandler}
             />
-            <p className="mr-2 text-lg font-medium w-full">
+            {/* <p className="mr-2 text-lg font-medium w-full">
               {material?.Spatrand ? material?.Spatrand : "0 - 150mm"}
-            </p>
+            </p> */}
           </div>
         </div>
         <div className="grid gap-2">
@@ -461,16 +468,42 @@ function MaterialSelect(props: {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => {
-                  handleClick;
-                  props.Data.handlePrint();
-                }}
-              >
-                Genereer offerte
-              </Button>
+              {props.Data.selectedMaterial !== null ?
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() => {
+                    handleClick;
+                    props.Data.handlePrint();
+                  }}
+                >
+                  Genereer offerte
+                </Button> :
+                <AlertDialog>
+                  <AlertDialogTrigger>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                    >
+                      Genereer offerte
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Materiaal nog niet geselecteerd</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        <p>
+                          U heeft nog geen materiaal geselecteerd.
+                          Selecteer eerst een materiaal voordat je een offerte kan genereren.
+                        </p>
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogAction>Terug</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              }
             </div>
           </div>
         </div>
