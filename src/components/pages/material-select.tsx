@@ -440,9 +440,8 @@ function MaterialSelect(props: {
                     variant="destructive"
                     size="lg"
                     className="mr-2"
-                    onClick={() => navigate(-1)}
                   >
-                    Verwijderen
+                    Reset
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
@@ -458,7 +457,7 @@ function MaterialSelect(props: {
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Terug</AlertDialogCancel>
-                    <AlertDialogAction>Verwijderen</AlertDialogAction>
+                    <AlertDialogAction onClick={() => window.location.reload()}>Reset</AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
@@ -468,10 +467,9 @@ function MaterialSelect(props: {
                 onClick={() => {
                   handleClick;
                   props.Data.handlePrint();
-                  navigate(-1);
                 }}
               >
-                Toevoegen
+                Genereer offerte
               </Button>
             </div>
           </div>

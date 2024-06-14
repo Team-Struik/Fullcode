@@ -8,10 +8,6 @@ import MaterialSelectPage from "./components/pages/material-select-page.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-  },
-  {
-    path: "/MaterialSelect",
     element: <MaterialSelectPage />,
   },
 ]);
