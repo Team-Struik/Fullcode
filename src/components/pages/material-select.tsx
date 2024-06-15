@@ -327,7 +327,7 @@ function MaterialSelect(props: {
               type="number"
               min={0}
               className="mr-2 max-w-fit"
-              placeholder="Breedte(mm)"
+              placeholder="Breedte (mm)"
               onChange={OnWindowsillWidthChangeHandler}
             />
             <Input
@@ -347,7 +347,7 @@ function MaterialSelect(props: {
               type="number"
               min={0}
               className="mr-2 max-w-fit"
-              placeholder="Breedte(mm)"
+              placeholder="Breedte (mm)"
               onChange={OnEdgingFinishWidthChangeHandler}
               disabled={material?.Randafwerking_mogelijk === "false"}
             />{" "}
