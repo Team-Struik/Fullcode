@@ -260,7 +260,7 @@ function Preview(props: {
               </p>
               <p className="w-48 text-xs font-bold text-black">Kraangat</p>
               <p className="w-52 text-xs font-bold text-black">
-                {props.Data.isSelectedSinkHole ? "Ja" : "Nee"}
+                {props.Data.isSelectedSinkHole ? "1" : "Nee"}
               </p>
               <p className="w-20 text-xs font-bold text-black">€10.70</p>
               <p className="text-xs font-bold text-black">
@@ -275,7 +275,7 @@ function Preview(props: {
               </p>
               <p className="w-48 text-xs font-bold text-black">Zeepdispenser</p>
               <p className="w-52 text-xs font-bold text-black">
-                {props.Data.isSelectedSoapDispender ? "Ja" : "Nee"}
+                {props.Data.isSelectedSoapDispender ? "1" : "Nee"}
               </p>
               <p className="w-20 text-xs font-bold text-black">€10.70</p>
               <p className="text-xs font-bold text-black">
@@ -302,8 +302,8 @@ function Preview(props: {
             </div>
           )}
           {props.Data.isSelectedCoarseSink === false &&
-          props.Data.isSelectedInlaySink === false &&
-          props.Data.isSelectedUndermountSink === false ? null : (
+            props.Data.isSelectedInlaySink === false &&
+            props.Data.isSelectedUndermountSink === false ? null : (
             <div className="px-12 flex pb-1">
               <p className="pr-16 text-xs font-bold text-black">
                 {itemCounter.pop()}
@@ -313,9 +313,9 @@ function Preview(props: {
               </p>
               <p className="w-52 text-xs font-bold text-black">
                 {props.Data.isSelectedCoarseSink ||
-                props.Data.isSelectedInlaySink ||
-                props.Data.isSelectedUndermountSink
-                  ? "Ja"
+                  props.Data.isSelectedInlaySink ||
+                  props.Data.isSelectedUndermountSink
+                  ? "1"
                   : "Nee"}
               </p>
               <p className="w-20 text-xs font-bold text-black">

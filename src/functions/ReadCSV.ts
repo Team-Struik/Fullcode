@@ -6,9 +6,9 @@ export type Data = {
   Materiaalsoort: string;
   Spatrand: string;
   Vensterbank: string;
-  Boorgaten_per_stuk_mogelijk: boolean;
-  WCD_mogelijk: boolean;
-  Randafwerking_mogelijk: boolean;
+  Boorgaten_per_stuk_mogelijk: string;
+  WCD_mogelijk: string;
+  Randafwerking_mogelijk: string;
   Prijs_per_m2: number;
   Randafwerking_pm: number;
   Spatrand_pm: number;

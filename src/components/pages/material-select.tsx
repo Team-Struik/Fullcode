@@ -25,6 +25,8 @@ import {
   SelectValue,
 } from "../ui/select";
 import { AlleMaterialen } from "./home";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { AlertCircle } from "lucide-react";
 
 let lastId = 0;
 let sinkButton1 = false;
@@ -242,10 +244,16 @@ function MaterialSelect(props: {
     navigate(-1);
   };
 
+  const vensterbankKlein = (material?.Vensterbank === "0-150 mm" && props.Data.windowsillWidth! > 150) && props.Data.windowsillWidth! !== null;
+  const vensterbankGroot = (material?.Vensterbank === "150 mm+" && props.Data.windowsillWidth! <= 150) && props.Data.windowsillWidth! !== null;
+  const randafwerkingKlein = (material?.Spatrand === "0-150 mm" && props.Data.edgingFinishWidth! > 150) && props.Data.edgingFinishWidth! !== null;
+  const randafwerkingGroot = (material?.Spatrand === "150 mm+" && props.Data.edgingFinishWidth! <= 150) && props.Data.edgingFinishWidth! !== null;
+
   return (
     <>
       <div className="grid gap-8">
         <div>
+          <h2 className="text-2xl font-bold pb-2">Materialen</h2>
           <Select
             onValueChange={(value) => {
               SetMatByName(value);
@@ -296,6 +304,7 @@ function MaterialSelect(props: {
                 type="number"
                 min={0}
                 onChange={OnDrillHolesChangeHandler}
+                disabled={material?.Boorgaten_per_stuk_mogelijk === "false"}
               />
             </div>
             <div className="flex mx-2">
@@ -304,6 +313,7 @@ function MaterialSelect(props: {
                 type="number"
                 min={0}
                 onChange={OnWallOutletChangeHandler}
+                disabled={material?.WCD_mogelijk === "false"}
               />
             </div>
           </div>
@@ -327,9 +337,6 @@ function MaterialSelect(props: {
               placeholder="Lengte (m)"
               onChange={OnWindowsillLengthChangeHandler}
             />
-            {/* <p className="mr-2 text-lg font-medium w-full">
-              {material?.Vensterbank ? material.Vensterbank : "0 - 150mm"}
-            </p> */}
           </div>
           <div className="flex mx-2">
             <p className="mr-36 text-lg font-medium">Randafwerking</p>{" "}
@@ -342,6 +349,7 @@ function MaterialSelect(props: {
               className="mr-2 max-w-fit"
               placeholder="Breedte(mm)"
               onChange={OnEdgingFinishWidthChangeHandler}
+              disabled={material?.Randafwerking_mogelijk === "false"}
             />{" "}
             <Input
               type="number"
@@ -349,10 +357,8 @@ function MaterialSelect(props: {
               className="mr-2 max-w-fit"
               placeholder="Lengte (m)"
               onChange={OnEdgingFinishLengthChangeHandler}
+              disabled={material?.Randafwerking_mogelijk === "false"}
             />
-            {/* <p className="mr-2 text-lg font-medium w-full">
-              {material?.Spatrand ? material?.Spatrand : "0 - 150mm"}
-            </p> */}
           </div>
         </div>
         <div className="grid gap-2">
@@ -476,6 +482,7 @@ function MaterialSelect(props: {
                     handleClick;
                     props.Data.handlePrint();
                   }}
+                  disabled={vensterbankKlein || vensterbankGroot || randafwerkingKlein || randafwerkingGroot}
                 >
                   Genereer offerte
                 </Button> :
@@ -508,6 +515,18 @@ function MaterialSelect(props: {
           </div>
         </div>
       </div>
+      {vensterbankKlein || vensterbankGroot || randafwerkingKlein || randafwerkingGroot ?
+        <Alert className="mt-24" variant="destructive">
+          <AlertCircle className="h-6 w-6 pt-1" />
+          <AlertTitle>Let op!</AlertTitle>
+          <AlertDescription>
+            <p>
+              U heeft een afmeting gekozen die niet mogelijk is met het geselecteerde materiaal.
+            </p>
+          </AlertDescription>
+        </Alert> :
+        null
+      }
     </>
   );
 }
