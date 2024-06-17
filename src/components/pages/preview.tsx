@@ -110,7 +110,7 @@ function Preview(props: {
         <img src={Logo} alt="Blis Digital Logo" className="float-left" />
         <div className="float-right">
           <p className="text-xs font-bold text-black">Blis Digital</p>
-          <p className="text-xs font-bold text-black">1234 AB, Lorem Ipsum</p>
+          <p className="text-xs font-bold text-black">1234 AB, Straat</p>
           <p className="text-xs font-bold text-black">Tel: 123 456 7890</p>
         </div>
       </div>
@@ -124,9 +124,9 @@ function Preview(props: {
         </div>
         <div className="float-right">
           <p className="text-xs font-bold text-black">Voor:</p>
-          <p className="text-xs font-bold text-black">Lorem Ipsum</p>
-          <p className="text-xs font-bold text-black">Lorem Ipsum</p>
-          <p className="text-xs font-bold text-black">Lorem Ipsum, 1234 AB</p>
+          <p className="text-xs font-bold text-black">Naam</p>
+          <p className="text-xs font-bold text-black">Plaats</p>
+          <p className="text-xs font-bold text-black">Straat, 1234 AB</p>
         </div>
       </div>
       <div className="flex items-center justify-center">
